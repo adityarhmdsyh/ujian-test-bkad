@@ -2,12 +2,17 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   public function up(): void
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
 {
-    
+    DB::statement("DROP VIEW IF EXISTS view_rekap_laporan_bulanan");
+
     DB::statement("
         CREATE VIEW view_rekap_laporan_bulanan AS
         SELECT 
@@ -17,13 +22,16 @@ return new class extends Migration
             SUM(CASE WHEN status = 'Diproses' THEN 1 ELSE 0 END) AS jumlah_diproses,
             SUM(CASE WHEN status = 'Selesai' THEN 1 ELSE 0 END) AS jumlah_selesai,
             SUM(CASE WHEN status = 'Ditolak' THEN 1 ELSE 0 END) AS jumlah_ditolak
-            FROM laporans 
-            GROUP BY YEAR(tgl_laporan), MONTH(tgl_laporan)
+        FROM laporans 
+        GROUP BY YEAR(tgl_laporan), MONTH(tgl_laporan)
     ");
 }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        DB::statement("DROP VIEW IF EXISTS view_rekap_laporan_bulanan");
+        Schema::dropIfExists('view_rekap_laporan_bulanan');
     }
 };

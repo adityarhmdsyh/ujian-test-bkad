@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Laporan extends Model
 {
     use HasFactory;
-    protected $table = 'laporan';
+    protected $table = 'laporans';
     protected $fillable = ['kategori_id', 'pelapor_id', 'judul', 'isi_laporan', 'tgl_laporan', 'status'];
 
     public function kategori()

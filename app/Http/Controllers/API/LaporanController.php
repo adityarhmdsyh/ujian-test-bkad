@@ -15,4 +15,19 @@ class LaporanController extends Controller
 
         return LaporanResource::collection($laporans);
     }
+
+    public function show($id)
+{
+    $laporan = Laporan::with([
+        'kategori', 'pelapor:id,nama', 'tanggapan.user:id,name'
+    ])->findOrFail($id);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Detail Laporan Berhasil Diambil',
+        'data' => $laporan
+    ], 200);
+
+    
+}
 }

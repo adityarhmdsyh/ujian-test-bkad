@@ -14,7 +14,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $laporans = Laporan::with(['kategori', 'pelapor'])->latest()->paginate(10);
+        $laporans = Laporan::with(['kategori', 'pelapor'])->latest()->paginate(5);
         return view('admin.laporan.index', compact('laporans'));
     }
 
@@ -97,4 +97,5 @@ class LaporanController extends Controller
 
         return redirect()->route('laporan.index')->with('danger', 'Laporan berhasil dihapus!');
     }
+    
 }

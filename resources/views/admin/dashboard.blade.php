@@ -1,68 +1,73 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
-    <div class="flex items-center justify-between mb-8">
-        <h2 class="text-3xl font-bold text-gray-800">Dashboard Pengaduan Masyarakat</h2>
-        <span class="text-sm text-gray-500">{{ now()->format('d M Y') }}</span>
-    </div>
-
-    <hr class="border-gray-200 mb-8">
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-blue-600 rounded-xl shadow-lg p-6 text-white transform hover:scale-105 transition duration-300">
-            <h5 class="text-blue-100 uppercase tracking-wider text-sm font-semibold">Total Laporan</h5>
-            <h3 class="text-4xl font-bold mt-2">{{ $stats['total_laporan'] }}</h3>
+<div class="p-6 lg:p-10">
+    <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-black text-slate-800 tracking-tight">Ringkasan Data</h1>
+            <p class="text-slate-500 text-sm font-medium">Statistik pengaduan per hari ini, {{ now()->translatedFormat('d F Y') }}.</p>
         </div>
-
-        <div class="bg-cyan-500 rounded-xl shadow-lg p-6 text-white transform hover:scale-105 transition duration-300">
-            <h5 class="text-cyan-100 uppercase tracking-wider text-sm font-semibold">Total Pelapor</h5>
-            <h3 class="text-4xl font-bold mt-2">{{ $stats['total_pelapor'] }}</h3>
-        </div>
-
-        <div class="bg-amber-400 rounded-xl shadow-lg p-6 text-gray-800 transform hover:scale-105 transition duration-300">
-            <h5 class="text-amber-800 uppercase tracking-wider text-sm font-semibold">Diproses</h5>
-            <h3 class="text-4xl font-bold mt-2">{{ $stats['status_proses'] }}</h3>
-        </div>
-
-        <div class="bg-emerald-500 rounded-xl shadow-lg p-6 text-white transform hover:scale-105 transition duration-300">
-            <h5 class="text-emerald-100 uppercase tracking-wider text-sm font-semibold">Selesai</h5>
-            <h3 class="text-4xl font-bold mt-2">{{ $stats['status_selesai'] }}</h3>
+        <div class="flex items-center gap-2 text-xs font-bold text-slate-400 bg-slate-100 px-4 py-2 rounded-full">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            SISTEM ONLINE
         </div>
     </div>
 
-    <div class="mt-12 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-        <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
-            <h4 class="text-lg font-bold text-gray-700">Rekap Laporan Per Bulan (Database View)</h4>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Aduan</p>
+            <h2 class="text-3xl font-black text-slate-800 mt-1">{{ $stats['total_laporan'] }}</h2>
+            <div class="mt-4 h-1 w-10 bg-blue-500 rounded-full"></div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Masyarakat</p>
+            <h2 class="text-3xl font-black text-slate-800 mt-1">{{ $stats['total_pelapor'] }}</h2>
+            <div class="mt-4 h-1 w-10 bg-cyan-500 rounded-full"></div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Proses</p>
+            <h2 class="text-3xl font-black text-slate-800 mt-1">{{ $stats['status_proses'] }}</h2>
+            <div class="mt-4 h-1 w-10 bg-amber-500 rounded-full"></div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Selesai</p>
+            <h2 class="text-3xl font-black text-slate-800 mt-1">{{ $stats['status_selesai'] }}</h2>
+            <div class="mt-4 h-1 w-10 bg-emerald-500 rounded-full"></div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-3xl border border-slate-200/60 shadow-sm overflow-hidden">
+        <div class="px-8 py-6 flex items-center justify-between border-b border-slate-100">
+            <h3 class="font-bold text-slate-700">Laporan Bulanan</h3>
+            <button class="text-xs font-bold text-blue-600 hover:underline">Lihat Semua</button>
         </div>
         
         <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
+            <table class="w-full text-left">
                 <thead>
-                    <tr class="bg-gray-100 text-gray-600 uppercase text-xs leading-normal">
-                        <th class="py-4 px-6 font-bold">Bulan</th>
-                        <th class="py-4 px-6 font-bold text-center">Tahun</th>
-                        <th class="py-4 px-6 font-bold text-center">Masuk</th>
-                        <th class="py-4 px-6 font-bold text-center">Diproses</th>
-                        <th class="py-4 px-6 font-bold text-center">Selesai</th>
-                        <th class="py-4 px-6 font-bold text-center">Ditolak</th>
+                    <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter bg-slate-50/50">
+                        <th class="px-8 py-4">Periode</th>
+                        <th class="px-6 py-4 text-center">Masuk</th>
+                        <th class="px-6 py-4 text-center">Proses</th>
+                        <th class="px-6 py-4 text-center">Selesai</th>
+                        <th class="px-6 py-4 text-center">Batal</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-700 text-sm">
+                <tbody class="text-sm font-medium text-slate-600 divide-y divide-slate-50">
                     @foreach($rekapBulanan as $data)
-                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition duration-200">
-                        <td class="py-4 px-6 font-medium text-gray-900">
-                            {{ date("F", mktime(0, 0, 0, $data->bulan, 10)) }}
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="px-8 py-4 text-slate-900 font-bold">
+                            {{ date("F", mktime(0, 0, 0, $data->bulan, 10)) }} <span class="text-slate-400 font-normal ml-1">{{ $data->tahun }}</span>
                         </td>
-                        <td class="py-4 px-6 text-center italic text-gray-500">{{ $data->tahun }}</td>
-                        <td class="py-4 px-6 text-center">
-                            <span class="bg-blue-100 text-blue-700 py-1 px-3 rounded-full font-bold">
-                                {{ $data->jumlah_laporan_masuk }}
-                            </span>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-md">{{ $data->jumlah_laporan_masuk }}</span>
                         </td>
-                        <td class="py-4 px-6 text-center font-semibold text-amber-600">{{ $data->jumlah_diproses }}</td>
-                        <td class="py-4 px-6 text-center font-semibold text-emerald-600">{{ $data->jumlah_selesai }}</td>
-                        <td class="py-4 px-6 text-center font-semibold text-red-500">{{ $data->jumlah_ditolak }}</td>
+                        <td class="px-6 py-4 text-center">{{ $data->jumlah_diproses }}</td>
+                        <td class="px-6 py-4 text-center ">{{ $data->jumlah_selesai }}</td>
+                        <td class="px-6 py-4 text-center">{{ $data->jumlah_ditolak }}</td>
                     </tr>
                     @endforeach
                 </tbody>

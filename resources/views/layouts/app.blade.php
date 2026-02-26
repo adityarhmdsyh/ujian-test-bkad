@@ -29,6 +29,10 @@
                     <i class="bi bi-file-earmark-text text-xl mr-3"></i>
                     <span class="font-medium">Laporan</span>
                 </a>
+                <a href="{{ route('rekap.index') }}" class="flex items-center px-4 py-3 rounded-xl transition {{ request()->is('rekap*') ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+                    <i class="bi bi-file-earmark-text text-xl mr-3"></i>
+                    <span class="font-medium">Cetak Laporan</span>
+                </a>
             </nav>
 
         
@@ -37,7 +41,7 @@
         <div class="flex-1 flex flex-col md:ml-64 min-h-screen">
             
             <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-20 shadow-sm">
-                <div class="font-bold text-gray-700 uppercase tracking-widest text-sm">Petugas Panel</div>
+                <div class="font-bold text-gray-700 uppercase tracking-widest text-sm"></div>
                 <div class="flex items-center space-x-4">
                     <div class="text-right">
                         <p class="text-xs text-gray-400 leading-none">Selamat Datang,</p>
